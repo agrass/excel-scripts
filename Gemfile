@@ -42,9 +42,14 @@ gem 'spring',        group: :development
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'haml-rails'
-gem 'pg'
+gem 'mysql'
 gem 'unicorn'
 gem 'unicorn-rails'
+
+gem 'oauth2'
+gem 'json'
+gem 'axlsx'
+gem 'heroku'
 
 group :development do
   gem 'better_errors'
@@ -58,5 +63,6 @@ end
 
 group :production do
   gem 'rails_12factor'
+  gem 'pg'
 end
 
