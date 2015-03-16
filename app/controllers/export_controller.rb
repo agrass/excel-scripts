@@ -10,7 +10,12 @@ class ExportController < ApplicationController
 
   def chilexpress
     token = get_access_token(params)
-    @orders = get_orders(token)
+    @orders = []
+    orders = get_orders(token)
+    orders.each do |order|
+      @orders << { 'data' => order, 'address' => process_address(order) } 
+      
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.xls
