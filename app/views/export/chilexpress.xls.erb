@@ -5,7 +5,7 @@
 <% end %>
 </tr>
 <%  @orders.each do |data| %>
-  <% order = data['data']; address = data['address']
+  <% order = data['data']; address = data['address'] %>
   <% ['3', '3', address[0], '1,2', order["_embedded"]["contact"]["name"], address[1], address[2], address[3], address[4], '11', '26', '29', '', '', '', ''  ].each do |col| %>
   <td><%= col %></td>
   <% end %>
