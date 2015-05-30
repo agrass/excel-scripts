@@ -13,8 +13,7 @@ class ExportController < ApplicationController
     @orders = []
     orders = get_orders(token)
     orders.each do |order|
-      @orders << { 'data' => order, 'address' => process_address(order) } 
-      
+      @orders << { 'data' => order, 'address' => process_address(order) }
     end
     respond_to do |format|
       format.html # index.html.erb
@@ -42,30 +41,14 @@ class ExportController < ApplicationController
     res = https.request(req)
     items = JSON.parse(res.body.to_s)
     items = items["_embedded"]["items"]
-
   end
 
   def process_address(order)
     comuna = order["_embedded"]["address"]["locality_name"]
-    calle_temp = order["_embedded"]["address"]["street"].split(" ")
-    index = 0
-    calle = ""
-    numero = ""
-    first_number = false
-    calle_temp.each do |slice|
-      next if first_number
-      slice = slice.gsub(/[#.]/, '')  
-      if (Integer(slice).is_a? Integer rescue false)
-        calle = calle_temp[0...index ].join(" ") if index > 0
-        numero = slice.gsub(/[#.]/, '')
-        first_number = true
-      else
-        index+=1
-      end
-    end
-    complemento = calle_temp[index + 1, calle_temp.length].join(" ") if index < calle_temp.length
+    calle_temp = order["_embedded"]["address"]["street"]
     referencia = order["_embedded"]["address"]["street_2"]
-    return comuna, calle, numero, complemento, referencia
+    street = calle_temp + ", " + referencia
+    return street, comuna
   end
 
 

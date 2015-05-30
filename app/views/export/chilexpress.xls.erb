@@ -1,3 +1,4 @@
+# encoding: UTF-8
 <table>
 <tr>
 <% ['PRODUCTO',  'SERVICIO',' DESTINO/COMUNA',  'PESO',  'DESTINATARIO',  'CALLE', 'NUMERO',  'COMPLEMENTO', 'REFERENCIA',  'ALTO', ' ANCHO', 'LARGO', 'CARGOEMPRESA',  'VALOR', 'CASILLA', 'EMAIL', 'CELULAR', 'ENTREGAOFICINA',  'INFOADICIONAL', 'AGRUPADA',  'AGRTOTALPIEZAS',  'AGRPIEZANUMERO', 'EMPRESA', 'DESTINATARIOSECUNDARIO'].each do |hd| %>
@@ -7,7 +8,7 @@
 <%  @orders.each do |data| %>
   <tr>
   <% order = data['data']; address = data['address'] %>
-  <% ['3', '3', address[0], '1,2', order["_embedded"]["contact"]["name"], address[1], address[2], address[3], address[4], '11', '26', '29', '', '', '', ''  ].each do |col| %>
+  <% ['3', '3', address[1], '1,2', order["_embedded"]["contact"]["name"], address[0], "", "", "", '11', '26', '29', '', '', '', ''  ].each do |col| %>
   <td><%= col %></td>
   <% end %>
   </tr>
