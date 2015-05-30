@@ -47,7 +47,7 @@ class ExportController < ApplicationController
     comuna = order["_embedded"]["address"]["locality_name"]
     calle_temp = order["_embedded"]["address"]["street"]
     referencia = order["_embedded"]["address"]["street_2"]
-    street = calle_temp + ", " + referencia
+    street = [calle_temp, referencia].reject! { |c| c.empty? }.join(", ")
     return street, comuna
   end
 
