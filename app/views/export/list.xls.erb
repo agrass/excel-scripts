@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+
+<Row>
+<% ['CONTACT',  'PRODUCT',' VARIANT',  'QUANTITY'].each do |hd| %>
+  <Cell><Data ss:Type="String"><%= hd %></Data></Cell>
+<% end %>
+</Row>
+<%  @orders.each do |data| %>
+  <Row>
+  <Cell><Data ss:Type="String"><%= data[:contact] %></Data></Cell>
+  <Cell><Data ss:Type="String"><%= data[:name] %></Data></Cell>
+  <Cell><Data ss:Type="String"><%= data[:variant] %></Data></Cell>
+  <Cell><Data ss:Type="String"><%= data[:units] %></Data></Cell>
+  </Row>
+<% end %>
+  </Table>
+  </Worksheet>
+</Workbook>
+

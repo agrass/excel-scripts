@@ -8,6 +8,23 @@ class ExportController < ApplicationController
   # For APIs, you may want to use :null_session instead.
   #protect_from_forgery with: :exception
 
+  def list
+    token = get_access_token(params)
+    @orders = []
+    orders = get_orders(token)
+    orders.each do |order|
+      order["_embedded"]["line_items"].each do |item|
+        @orders << { :contact => order["_embedded"]["contact"]["name"], :name =>  item["product_title"], :variant => item["variant_title"], :units => item["requested_units"]}
+      end
+    end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xls
+      format.xml  { render :xml => @orders }
+    end
+
+  end
+
   def chilexpress
     token = get_access_token(params)
     @orders = []
