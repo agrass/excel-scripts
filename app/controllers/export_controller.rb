@@ -54,7 +54,7 @@ class ExportController < ApplicationController
     uri = URI.parse(ur)
     https = Net::HTTP.new(uri.host,uri.port)
     https.use_ssl = true
-    req = Net::HTTP::Get.new(uri.path + "?status=closed", {'Authorization' =>"Bearer #{token}", "Content-Type" => "application/json", "status" => "closed"})
+    req = Net::HTTP::Get.new(uri.path + "?status=closed&sort=created_on.asc&per_page=120", {'Authorization' =>"Bearer #{token}", "Content-Type" => "application/json", "status" => "closed"})
     res = https.request(req)
     items = JSON.parse(res.body.to_s)
     items = items["_embedded"]["items"]
